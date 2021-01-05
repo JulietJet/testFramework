@@ -1,52 +1,45 @@
 package utils;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.*;
-
-import java.time.Duration;
 
 public class Driver {
 
-	private WebDriver driver;
+	private static WebDriver driver;
 
-	@BeforeTest
-	public void beforeTest() {
-		String operationSystem = System.getProperty("os.name").toLowerCase();
-
-		if (operationSystem.contains("mac")) {
-			System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chrome/mac/chromedriver");
-		} else {
-			System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chrome/win/chromedriver");
+	public static WebDriver getDriver() {
+		try {
+			if (driver == null) {
+				setupDriver();
+				launch();
+			}
 		}
-
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("https://www.lamoda.by/");
-
-
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return driver;
 	}
 
-	@AfterTest
-	public void afterTest() {
+	public static void closeDriver() {
+		driver.close();
 		driver.quit();
 	}
 
-	@Test
-	public void test() {
-		WebElement searchInput = driver.findElement(By.cssSelector("input.search__input"));
+	private static void setupDriver() throws Exception {
+		String browser = PropertyReader.readProperty("browser");
+		if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chrome/win/chromedriver.exe");
+			driver = new ChromeDriver();
+		} else {
+			throw new Exception("This browser is not supported");
+		}
+	}
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-		wait.until(ExpectedConditions.visibilityOf(searchInput));
-
-		Assert.assertTrue(searchInput.isDisplayed());
-
+	private static void launch() {
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.get(PropertyReader.readProperty("url"));
+		//driver.get("https://the-internet.herokuapp.com/");
 	}
 
 
