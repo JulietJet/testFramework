@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import utils.Driver;
+import utils.Verification;
 
 public class AbstractTest {
 
@@ -22,6 +23,12 @@ public class AbstractTest {
 	public void afterTest()  {
 		Driver.closeDriver();
 	}
+
+	protected void assertAll() {
+		Verification.assertAll();
+	}
+
+
 
 
 }
