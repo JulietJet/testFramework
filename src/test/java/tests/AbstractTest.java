@@ -7,17 +7,19 @@ import utils.Driver;
 
 public class AbstractTest {
 
+	protected WebDriver driver;
+
 	@BeforeTest
 	public void beforeTest() {
 		try {
-			Driver.getDriver();
+			driver = Driver.getDriver();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@AfterTest
-	public void afterTest() throws Exception {
+	public void afterTest()  {
 		Driver.closeDriver();
 	}
 

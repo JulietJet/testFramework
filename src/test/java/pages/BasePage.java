@@ -1,14 +1,14 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import utils.Driver;
 
 public abstract class BasePage {
 
-    WebDriver driver = Driver.getDriver();
+    WebDriver driver;
     String pageName;
 
-    protected BasePage(String pageName) {
+    protected BasePage(WebDriver driver, String pageName) {
+        this.driver = driver;
         this.pageName = pageName;
     }
 
