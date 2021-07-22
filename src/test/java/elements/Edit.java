@@ -1,16 +1,16 @@
 package elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import utils.UIInteractionException;
 
 public class Edit extends Element {
 
     private WebDriver driver;
 
-    public Edit(WebDriver driver, By locator) {
-        super(driver, locator);
+    public Edit(WebElement webElement) {
+        super(webElement);
     }
 
     public void type(String text) {

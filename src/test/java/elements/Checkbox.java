@@ -1,16 +1,16 @@
 package elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import utils.UIInteractionException;
 
 public class Checkbox extends Element {
 
     WebDriver driver;
 
-    public Checkbox(WebDriver driver, By locator) {
-        super(driver, locator);
+    public Checkbox(WebElement webElement) {
+        super(webElement);
     }
 
 

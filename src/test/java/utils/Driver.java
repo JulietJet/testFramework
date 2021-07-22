@@ -22,7 +22,6 @@ public class Driver {
 
 	public static void closeDriver() {
 		driver.close();
-		driver.quit();
 	}
 
 	private static void setupDriver() throws Exception {
@@ -39,7 +38,6 @@ public class Driver {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.get(PropertyReader.readProperty("url"));
-		//driver.get("https://the-internet.herokuapp.com/");
 	}
 
 

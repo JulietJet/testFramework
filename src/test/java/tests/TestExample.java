@@ -3,29 +3,32 @@ package tests;
 
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-import utils.Verification;
+import pages.HomePage;
+import utils.Driver;
 
 
 public class TestExample extends AbstractTest {
 
-	//добавить логирование, отчеты
-	//скриншоты
-	//добавить лисенер
-	//добавить асерт, софт асерт
 
 
-	@Test
+	@Test(description = "Test 1")
 	public void test() {
+		final String query = "ldm;ldm;alsda";
 
+		driver = Driver.getDriver();
+		HomePage homePage = new HomePage(driver);
+		homePage.search(query);
+		SoftAssert softAssert = new SoftAssert();
+		homePage.isErrorNotDisplayed();
+		softAssert.assertEquals(homePage.getSearchErrorMessage(), "No results were found for your search \"" + query + "\"");
+		homePage.clickSignIn();
 
+		softAssert.assertAll();
 
-		//soft.assertAll();
+	}
 
+	@Test(description = "Test 2")
+	public void test2() {
 
-		//verify all methods of all elements
-
-
-
-		assertAll();
 	}
 }

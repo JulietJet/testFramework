@@ -1,16 +1,16 @@
 package elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import utils.UIInteractionException;
 
 public class RadioButton extends Element {
 
     WebDriver driver;
 
-    public RadioButton(WebDriver driver, By locator) {
-        super(driver, locator);
+    public RadioButton(WebElement webElement) {
+        super(webElement);
     }
 
     public boolean isSelected() {

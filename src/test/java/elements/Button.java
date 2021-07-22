@@ -1,14 +1,14 @@
 package elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class Button extends Element {
 
     WebDriver driver;
 
-    public Button(WebDriver driver, By locator) {
-        super(driver, locator);
+    public Button(WebElement webElement) {
+        super(webElement);
     }
 
 }

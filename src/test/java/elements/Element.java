@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Driver;
 import utils.PropertyReader;
 import utils.UIInteractionException;
 
@@ -11,19 +12,21 @@ import java.time.Duration;
 
 public class Element {
 
+    private WebElement element;
+    private final int elementTimeout;
     private WebDriver driver;
-    protected final By locator;
-    private int elementTimeout;
 
-    public Element(WebDriver driver, By locator) {
-        this.driver = driver;
-        this.locator = locator;
+
+    public Element(WebElement webElement) {
+        this.element = webElement;
         elementTimeout = Integer.parseInt(PropertyReader.readProperty("waitTimeout"));
+        driver = Driver.getDriver();
     }
 
     public boolean isDisplayed() {
         try {
-            getFluentWait(elementTimeout).until(ExpectedConditions.visibilityOfElementLocated(locator));
+            getFluentWait(elementTimeout).until(ExpectedConditions.visibilityOf(element));
+
             return true;
         } catch (TimeoutException e) {
             return false;
@@ -32,7 +35,7 @@ public class Element {
 
     public boolean isNotDisplayed() {
         try {
-            getFluentWait(elementTimeout).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+            getFluentWait(elementTimeout).until(ExpectedConditions.invisibilityOf(element));
             return true;
         } catch (TimeoutException e) {
             return false;
@@ -81,7 +84,7 @@ public class Element {
 
     protected WebElement getWebElement() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(elementTimeout));
-        return wait.pollingEvery(Duration.ofSeconds(1)).until(ExpectedConditions.presenceOfElementLocated(locator));
+        return wait.pollingEvery(Duration.ofSeconds(1)).until(ExpectedConditions.visibilityOf(element));
     }
 
     private FluentWait<WebDriver> getFluentWait(int timeout) {

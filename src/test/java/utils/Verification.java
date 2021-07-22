@@ -6,7 +6,7 @@ import org.testng.asserts.SoftAssert;
 
 public class Verification {
 
-    private final static SoftAssert softAssert = new SoftAssert();;
+    private final static SoftAssert softAssert = new SoftAssert();
 
 
     public static void assertTrue(Boolean condition, String message) {

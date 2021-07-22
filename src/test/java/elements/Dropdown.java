@@ -1,7 +1,5 @@
 package elements;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -12,8 +10,8 @@ import java.util.List;
 
 public class Dropdown extends Element {
 
-    public Dropdown(WebDriver driver, By locator) {
-        super(driver, locator);
+    public Dropdown(WebElement webElement) {
+        super(webElement);
     }
 
     private Select getSelect() {
